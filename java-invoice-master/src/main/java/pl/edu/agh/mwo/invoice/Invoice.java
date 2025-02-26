@@ -31,7 +31,13 @@ public class Invoice {
     }
 
     public BigDecimal getTax() {
-        return null;
+        BigDecimal subtotalTax = BigDecimal.ZERO;
+        if (!products.isEmpty()) {
+            for (Product product : products) {
+                subtotalTax = subtotalTax.add(product.getPriceWithTax().subtract(product.getPrice()));
+            }
+        }
+        return subtotalTax;
     }
 
     public BigDecimal getTotal() {
