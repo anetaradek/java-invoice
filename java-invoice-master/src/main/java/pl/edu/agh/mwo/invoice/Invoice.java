@@ -41,6 +41,12 @@ public class Invoice {
     }
 
     public BigDecimal getTotal() {
-        return null;
+        BigDecimal total = BigDecimal.ZERO;
+        if (!products.isEmpty()) {
+            for (Product product : products) {
+                total = total.add(product.getPriceWithTax());
+            }
+        }
+        return total;
     }
 }
